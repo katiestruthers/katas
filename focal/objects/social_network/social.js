@@ -1,3 +1,32 @@
+const convertUserNumbersToNames = function(numbers, network) {
+  let string = "";
+
+  for (let i = 0; i < numbers.length; i++) {
+    string += network[numbers[i]].name;
+
+    if (i < numbers.length - 1) {
+      string += ", ";
+    }
+  }
+
+  return string;
+};
+
+const findFollowers = function(number, network) {
+  const followerIDs = [];
+
+  for (const user in network) {
+    for (const item of network[user].follows) {
+      if (item === number) {
+        followerIDs.push(user);
+        break;
+      }
+    }
+  }
+
+  return followerIDs;
+};
+
 const biggestFollower = function(network) {
   let names = [];
   let people = 0;
@@ -75,58 +104,6 @@ const unrequitedFollowers = function(network) {
 
   return unrequited;
 };
-
-const convertUserNumbersToNames = function(numbers, network) {
-  let string = "";
-
-  for (let i = 0; i < numbers.length; i++) {
-    string += network[numbers[i]].name;
-
-    if (i < numbers.length - 1) {
-      string += ", ";
-    }
-  }
-
-  return string;
-};
-
-const findFollowers = function(number, network) {
-  const followerIDs = [];
-
-  for (const user in network) {
-    for (const item of network[user].follows) {
-      if (item === number) {
-        followerIDs.push(user);
-        break;
-      }
-    }
-  }
-
-  return followerIDs;
-};
-
-// const findHighest = function(testing, network) {
-//   let highest = 0;
-
-//   for (const item in object) {
-//     if (testing > highest) {
-//       highest = testing;
-//     }
-//   }
-
-//   return highest;
-// };
-
-// const pushMatching = function(object, match) {
-//   const returnArray = [];
-
-//   for (const item in object) {
-//     if (object[item] === match) {
-//       returnArray.push
-//     }
-//   }
-
-// };
 
 const data = {
   f01: {
