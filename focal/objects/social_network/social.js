@@ -57,21 +57,23 @@ const printAll = function(network) {
 };
 
 const unrequitedFollowers = function(network) {
-  const names = [];
+  const unrequited = {};
   let userFollowers;
 
   for (const user in network) {
     userFollowers = findFollowers(user, network);
 
     for (const follows of network[user].follows) {
-      console.log(follows);
-      if (!(userFollowers.includes(follows)) && !(names.includes(network[user].name))) {
-        names.push(network[user].name);
+      if (!(userFollowers.includes(follows))) {
+        if (!(network[user].name in unrequited)) {
+          unrequited[network[user].name] = [];
+        }
+        unrequited[network[user].name].push(network[follows].name);
       }
     }
   }
 
-  return names;
+  return unrequited;
 };
 
 const convertUserNumbersToNames = function(numbers, network) {
@@ -101,20 +103,6 @@ const findFollowers = function(number, network) {
   }
 
   return followerIDs;
-};
-
-const eqArrays = function(arr1, arr2) {
-  if (arr1.length !== arr2.length) {
-    return false;
-  }
-
-  for (let i = 0; i < arr1.length; i++) {
-    if (arr1[i] !== arr2[i]) {
-      return false;
-    }
-  }
-
-  return true;
 };
 
 // const findHighest = function(testing, network) {
