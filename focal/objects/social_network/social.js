@@ -2,12 +2,14 @@ const biggestFollower = function(network) {
   let names = [];
   let people = 0;
 
+  // Determine highest number
   for (const user in network) {
     if (network[user].follows.length > people) {
       people = network[user].follows.length;
     }
   }
 
+  // Find all users with that highest number
   for (const user in network) {
     if (network[user].follows.length === people) {
       names.push(network[user].name);
@@ -45,13 +47,31 @@ const mostPopular = function(network) {
 };
 
 const printAll = function(network) {
+  console.log("---");
   for (const user in network) {
-    console.log(user);
     console.log("Name:", network[user].name);
     console.log("Following:", convertUserNumbersToNames(network[user].follows, network));
     console.log("Followers:", convertUserNumbersToNames(findFollowers(user, network), network));
-    console.log("---\n");
+    console.log("---");
   }
+};
+
+const unrequitedFollowers = function(network) {
+  const names = [];
+  let userFollowers;
+
+  for (const user in network) {
+    userFollowers = findFollowers(user, network);
+
+    for (const follows of network[user].follows) {
+      console.log(follows);
+      if (!(userFollowers.includes(follows)) && !(names.includes(network[user].name))) {
+        names.push(network[user].name);
+      }
+    }
+  }
+
+  return names;
 };
 
 const convertUserNumbersToNames = function(numbers, network) {
@@ -83,12 +103,26 @@ const findFollowers = function(number, network) {
   return followerIDs;
 };
 
-// const findHighest = function(object) {
+const eqArrays = function(arr1, arr2) {
+  if (arr1.length !== arr2.length) {
+    return false;
+  }
+
+  for (let i = 0; i < arr1.length; i++) {
+    if (arr1[i] !== arr2[i]) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+// const findHighest = function(testing, network) {
 //   let highest = 0;
 
 //   for (const item in object) {
-//     if (object[item] > highest) {
-//       highest = object[item];
+//     if (testing > highest) {
+//       highest = testing;
 //     }
 //   }
 
@@ -142,3 +176,4 @@ const data = {
 console.log(biggestFollower(data));
 console.log(mostPopular(data));
 printAll(data);
+console.log(unrequitedFollowers(data));
