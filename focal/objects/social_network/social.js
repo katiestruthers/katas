@@ -134,32 +134,31 @@ const printAll = function(network) {
   }
 };
 
-const followersOfFollowers = function(user, followers, network) {
-  const uniqueFollowers = [];
+const followersOfFollowers = function(user, firstFollowers, network) {
+  const uniqueSecondFollowers = [];
 
-  for (const follower in followers) {
-    let followersFollowers = findFollowers(follower, network);
+  for (const firstFollower of firstFollowers) {
+    let secondFollowers = findFollowers(firstFollower, network);
 
-    for (const followersFollower in followersFollowers) {
-      if ((followersFollower !== user) && !(uniqueFollowers.includes(followersFollower))) {
-        uniqueFollowers.push(followersFollower);
+    for (const secondFollower of secondFollowers) {
+      if ((secondFollower !== user) && !(uniqueSecondFollowers.includes(secondFollower)) && !(firstFollowers.includes(secondFollower))) {
+        uniqueSecondFollowers.push(secondFollower);
       }
     }
   }
 
-  return uniqueFollowers;
+  return uniqueSecondFollowers;
 };
 
 const printReach = function(network) {
-  console.log("---");
   for (const user in network) {
-    const userFollowers = findFollowers(user, network).length;
-    const userFollowersFollowers = followersOfFollowers(user, userFollowers, network).length;
+    const userFollowers = findFollowers(user, network);
+    const userFollowersFollowers = followersOfFollowers(user, userFollowers, network);
 
     console.log("Name:", network[user].name);
-    console.log("Followers:", userFollowers);
-    console.log("Unique Followers of Followers:", userFollowersFollowers);
-    console.log("Total:", userFollowers + userFollowersFollowers);
+    console.log("Followers:", userFollowers.length);
+    console.log("Unique Followers of Followers:", userFollowersFollowers.length);
+    console.log("Total Reach:", userFollowers.length + userFollowersFollowers.length);
     console.log("---");
   }
 };
