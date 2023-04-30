@@ -63,6 +63,40 @@ const biggestFollower = function(network) {
   return names;
 };
 
+const biggestFollowerOver30 = function(network) {
+  const testList = convertNamesToUserNumbers(biggestFollower(network), network);
+  const testObj = {};
+  const names = [];
+  let highest = 0;
+  let highestTemp;
+
+  // Determine highest number
+  for (const number of testList) {
+    highestTemp = 0;
+
+    for (const following of network[number].follows) {
+      if (network[following].age > 30) {
+        highestTemp++;
+      }
+    }
+
+    if (highestTemp > highest) {
+      highest = highestTemp;
+    }
+
+    testObj[network[number].name] = highestTemp;
+  }
+
+  // Find all users with highest number
+  for (const user in testObj) {
+    if (testObj[user] === highest) {
+      names.push(user);
+    }
+  }
+
+  return names;
+};
+
 const mostPopular = function(network) {
   let followers = {};
   let highest = 0;
@@ -221,6 +255,7 @@ printAll(data);
 console.log("User Reach List:");
 printReach(data);
 console.log("Users following the most people:", biggestFollower(data));
+console.log("Users following the most people over the age of 30:,", biggestFollowerOver30(data));
 console.log("Users with the most followers:", mostPopular(data));
 console.log("Users with the most followers over the age of 30:", mostPopularOver30(data));
 console.log("Users with unrequited followers:", unrequitedFollowers(data));
