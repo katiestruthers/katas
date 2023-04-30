@@ -134,6 +134,36 @@ const printAll = function(network) {
   }
 };
 
+const followersOfFollowers = function(user, followers, network) {
+  const uniqueFollowers = [];
+
+  for (const follower in followers) {
+    let followersFollowers = findFollowers(follower, network);
+
+    for (const followersFollower in followersFollowers) {
+      if ((followersFollower !== user) && !(uniqueFollowers.includes(followersFollower))) {
+        uniqueFollowers.push(followersFollower);
+      }
+    }
+  }
+
+  return uniqueFollowers;
+};
+
+const printReach = function(network) {
+  console.log("---");
+  for (const user in network) {
+    const userFollowers = findFollowers(user, network).length;
+    const userFollowersFollowers = followersOfFollowers(user, userFollowers, network).length;
+
+    console.log("Name:", network[user].name);
+    console.log("Followers:", userFollowers);
+    console.log("Unique Followers of Followers:", userFollowersFollowers);
+    console.log("Total:", userFollowers + userFollowersFollowers);
+    console.log("---");
+  }
+};
+
 const unrequitedFollowers = function(network) {
   const unrequited = {};
   let userFollowers;
@@ -187,7 +217,10 @@ const data = {
   }
 };
 
+console.log("User Following & Followers List:");
 printAll(data);
+console.log("User Reach List:");
+printReach(data);
 console.log("Users following the most people:", biggestFollower(data));
 console.log("Users with the most followers:", mostPopular(data));
 console.log("Users with the most followers over the age of 30:", mostPopularOver30(data));
