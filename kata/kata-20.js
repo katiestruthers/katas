@@ -8,8 +8,7 @@ const blocksAway = function(directions) {
   if (directions[0] === 'right') {
     east = true;
     north = false;
-  }
-  else {
+  } else {
     east = false;
     north = true;
   }
@@ -19,49 +18,38 @@ const blocksAway = function(directions) {
       if (east) {
         east = false;
         south = true;
-      }
-      else if (west) {
+      } else if (west) {
         west = false;
         north = true;
-      }
-      else if (north) {
+      } else if (north) {
         north = false;
         east = true;
-      }
-      else {
+      } else {
         south = false;
         west = true;
       }
-    }
-    else if (directions[i] === 'left') {
+    } else if (directions[i] === 'left') {
       if (east) {
         east = false;
         north = true;
-      }
-      else if (west) {
+      } else if (west) {
         west = false;
         south = true;
-      }
-      else if (north) {
+      } else if (north) {
         north = false;
         west = true;
-      }
-      else {
+      } else if (south) {
         south = false;
         east = true;
       }
-    }
-    else {
+    } else {
       if (east) {
         destination.east += directions[i];
-      }
-      else if (west) {
+      } else if (west) {
         destination.east -= directions[i];
-      }
-      else if (north) {
+      } else if (north) {
         destination.north += directions[i];
-      }
-      else {
+      } else {
         destination.north -= directions[i];
       }
     }

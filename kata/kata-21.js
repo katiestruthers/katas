@@ -2,11 +2,12 @@ let prompt = require("prompt-sync")();
 let random = Math.floor(Math.random() * 101);
 let answer = prompt("Guess a number: ");
 
-function numberGuesser (random, answer) {
+const numberGuesser = function(random, answer) {
   let attempts = 1;
   let guessed = false;
   const log = [];
 
+  /*eslint no-constant-condition: ["error", { "checkLoops": false }]*/
   while (true) {
     for (let i = 0; i < log.length; i++) {
       if (answer === log[i]) {
@@ -18,20 +19,16 @@ function numberGuesser (random, answer) {
 
     if (isNaN(answer)) {
       console.log("Not a number! Try again!");
-    }
-    else if (guessed === true) {
+    } else if (guessed === true) {
       guessed = false;
       console.log("Already Guessed!");
-    }
-    else if (answer > random) {
+    } else if (answer > random) {
       attempts++;
       console.log("Too High!");
-    }
-    else if (answer < random) {
+    } else if (answer < random) {
       attempts++;
       console.log("Too Low!");
-    }
-    else {
+    } else {
       console.log("You got it! It took " + attempts + " attempts!");
       break;
     }
@@ -39,6 +36,6 @@ function numberGuesser (random, answer) {
     answer = prompt("Guess a number: ");
   }
 
-}
+};
 
-numberGuesser (random, answer);
+numberGuesser(random, answer);

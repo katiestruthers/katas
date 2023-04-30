@@ -5,8 +5,7 @@ const urlEncode = function(text) {
   for (let i = 0; i < test.length; i++) {
     if (test[i] === ' ') {
       string += '%20';
-    }
-    else {
+    } else {
       string += test[i];
     }
   }

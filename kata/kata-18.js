@@ -22,16 +22,14 @@ const squareCode = function(message) {
   // Convert square to coded message
   if (remainder === 0) {
     rowLength = columns;
-  }
-  else {
+  } else {
     rowLength = columns - (columns - remainder);
   }
 
   for (let i = 0; i < columns; i++) {
     if (i < rowLength) {
       jLength = rows;
-    }
-    else {
+    } else {
       jLength = rows - 1;
     }
 

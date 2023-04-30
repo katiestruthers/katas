@@ -8,8 +8,7 @@ const makeCase = function(input, style) {
   if (Array.isArray(style)) {
     case1 = style[0];
     case2 = style[1];
-  }
-  else {
+  } else {
     case1 = style;
   }
 
@@ -25,36 +24,30 @@ const makeCase = function(input, style) {
     if (case1 === 'camel' || case2 === 'camel') {
       button = false;
       spacer = '';
-    }
-    else if (case1 === 'pascal' || case2 === 'pascal') {
+    } else if (case1 === 'pascal' || case2 === 'pascal') {
       button = true;
       spacer = '';
-    }
-    else if (case1 === 'snake' || case2 === 'snake') {
+    } else if (case1 === 'snake' || case2 === 'snake') {
       spacer = '_';
-    }
-    else if (case1 === 'kebab' || case2 === 'kebab') {
+    } else if (case1 === 'kebab' || case2 === 'kebab') {
       spacer = '-';
-    }
-    else {
+    } else {
       button = true;
       spacer = ' ';
     }
 
     for (let i = 0; i < input.length; i++) {
-      // Check for a space
+      /*  1. Check for a space
+          2. If previous was a space, then uppercase on select styles
+          3. If previous was not a space, add the current character in */
       if (input[i] === ' ') {
         button = true;
         string += spacer;
-      }
-      // If previous was a space, then uppercase on select styles
-      else if (button === true && !(case1 === 'snake' || case2 === 'snake' || 
+      } else if (button === true && !(case1 === 'snake' || case2 === 'snake' ||
                case1 === 'kebab' || case2 === 'kebab')) {
         string += input[i].toUpperCase();
         button = false;
-      }
-      // If previous was not a space, add the current character as is
-      else {
+      } else {
         string += input[i];
       }
     }
@@ -66,8 +59,7 @@ const makeCase = function(input, style) {
     // Set differences
     if (case1 === 'vowel' || case2 === 'vowel') {
       button = true;
-    }
-    else {
+    } else {
       button = false;
     }
 
@@ -75,8 +67,7 @@ const makeCase = function(input, style) {
     for (let i = 0; i < string.length; i++) {
       if ((string[i] === 'a' || string[i] === 'e' || string[i] === 'i' || string[i] === 'o' || string[i] === 'u') === button) {
         stringTemp += string[i].toUpperCase();
-      }
-      else {
+      } else {
         stringTemp += string[i];
       }
     }
@@ -95,7 +86,7 @@ const makeCase = function(input, style) {
   }
 
   return string;
-}
+};
 
 
 console.log(makeCase("this is a string", "camel"));

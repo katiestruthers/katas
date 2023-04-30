@@ -9,23 +9,19 @@ const urlDecode = function(text) {
   for (let i = 0; i < text.length; i++) {
     if (text[i] === '=') {
       button = true;
-    }
-    else if (text[i] === '&') {
+    } else if (text[i] === '&') {
       decoded[tempProp] = tempVal;
       tempProp = '';
       tempVal = '';
       button = false;
-    }
-    else if (button === true) {
+    } else if (button === true) {
       if (text[i] === '%' && text[i + 1] === '2' && text[i + 2] === '0') {
         tempVal += ' ';
         i += 2;
-      }
-      else {
+      } else {
         tempVal += text[i];
       }
-    }
-    else {
+    } else {
       tempProp += text[i];
     }
   }

@@ -1,20 +1,20 @@
-function generateBoard(whiteQueen, blackQueen) {
+const generateBoard = function(whiteQueen, blackQueen) {
   /* I tried using this more succient bit of code but it was causing the 1's to repeat in every row
   const board = Array(8).fill(Array(8).fill(0)); */
   const board = [[0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0]];
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0]];
   board[whiteQueen[0]][whiteQueen[1]] += 1;
   board[blackQueen[0]][blackQueen[1]] += 1;
   return board;
-}
+};
 
-function queenThreat(board) {
+const queenThreat = function(board) {
   let total, i, j, column;
 
   for (i = 0; i < 8; i++) {
@@ -53,7 +53,7 @@ function queenThreat(board) {
     column = i;
     for (j = 0; j < (8 - i); j++) {
       total += board[column][j];
-      column++
+      column++;
     }
     if (total === 2) {
       return true;
@@ -61,7 +61,7 @@ function queenThreat(board) {
   }
 
   return false;
-}
+};
 
 // testing
 let whiteQueen = [0, 5];

@@ -5,12 +5,10 @@ const camelCase = function(input) {
   for (let i = 0; i < input.length; i++) {
     if (input[i] === ' ') {
       button = true;
-    }
-    else if (button === true) {
+    } else if (button === true) {
       string += input[i].toUpperCase();
       button = false;
-    }
-    else {
+    } else {
       string += input[i];
     }
   }

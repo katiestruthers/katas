@@ -3,11 +3,9 @@ const organizeInstructors = function(instructors) {
 
   for (let i = 0; i < instructors.length; i++) {
     // Check to see if course already added
-    if (courses.hasOwnProperty(instructors[i].course)) {
+    if (instructors[i].course in courses) {
       courses[instructors[i].course].push(instructors[i].name);
-    }
-    // If not, add the new course 
-    else {
+    } else { // If not, add the new course
       courses[instructors[i].course] = [instructors[i].name];
     }
   }
