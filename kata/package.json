@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "prompt-sync": "^4.1.5"
+  },
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "mocha": "^9.2.2"
+  },
+  "name": "kata",
+  "version": "1.0.0",
+  "main": "kata-1.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
